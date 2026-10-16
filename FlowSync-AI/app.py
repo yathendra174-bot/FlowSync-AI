@@ -1,7 +1,12 @@
 import os
+import sys
 import base64
 from pathlib import Path
 from collections import deque
+
+_app_dir = Path(__file__).resolve().parent
+if str(_app_dir) not in sys.path:
+    sys.path.insert(0, str(_app_dir))
 import time
 import inspect
 import importlib
