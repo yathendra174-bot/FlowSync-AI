@@ -1,10 +1,15 @@
 @echo off
 cd /d "%~dp0"
 if not exist ".venv\Scripts\python.exe" (
-  py -m venv .venv
+    if exist "..\.venv\Scripts\python.exe" (
+        call ..\.venv\Scripts\activate.bat
+    ) else (
+        py -m venv .venv
+        call .venv\Scripts\activate.bat
+    )
+) else (
+    call .venv\Scripts\activate.bat
 )
-call .venv\Scripts\activate.bat
-python -m pip install --upgrade pip
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 streamlit run app.py
 pause
